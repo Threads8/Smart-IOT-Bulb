@@ -1,0 +1,7 @@
+{
+  "name": "smart-iot-root",
+  "private": true,
+  "scripts": {
+    "build": "cd mobile && npm install && npm run build"
+  }
+}
