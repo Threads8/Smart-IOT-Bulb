@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 // Init WiZ Controller
 const WizController = require('./wiz/wizController');
 const bulb = process.env.WIZ_LIGHT_IP ? new WizController(process.env.WIZ_LIGHT_IP) : null;
-let bulbState = { state: false, dimming: 0, r: 0, g: 0, b: 0, temp: 0 };
+let bulbState = { state: false, dimming: 100, r: 255, g: 255, b: 255, temp: 2700 };
 
 // Init Firebase
 const firebaseManager = require('./firebaseManager');

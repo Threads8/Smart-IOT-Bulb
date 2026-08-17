@@ -21,7 +21,7 @@ class WizController {
             });
 
             // Resolve immediately since we can't synchronously await the UDP response over WS
-            resolve({ result: { success: true } });
+            resolve({});
         });
     }
 
