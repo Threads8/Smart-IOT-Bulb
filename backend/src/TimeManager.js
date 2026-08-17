@@ -45,7 +45,18 @@ class TimeManager {
 
     getState() {
         const now = new Date();
-        const currentMins = now.getHours() * 60 + now.getMinutes();
+        const tz = process.env.TIMEZONE || 'Asia/Kolkata';
+        
+        // Use Intl to get the localized HH:MM
+        const formatter = new Intl.DateTimeFormat('en-GB', { 
+            timeZone: tz, 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            hour12: false 
+        });
+        const timeStr = formatter.format(now);
+        const [hh, mm] = timeStr.split(':');
+        const currentMins = parseInt(hh, 10) * 60 + parseInt(mm, 10);
         const wakeMins = this._timeToMinutes(this.preferences.wakeUpTime);
         const bedMins = this._timeToMinutes(this.preferences.bedtime);
         
@@ -84,10 +95,25 @@ class TimeManager {
             isDay = false; isNight = true;
         }
 
+        // Get localized date
+        const dateFormatter = new Intl.DateTimeFormat('en-CA', { // en-CA uses YYYY-MM-DD
+            timeZone: tz,
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+        const currentDate = dateFormatter.format(now);
+        
+        // Get localized day of week (0-6)
+        const dayFormatter = new Intl.DateTimeFormat('en-US', { timeZone: tz, weekday: 'short' });
+        const dayName = dayFormatter.format(now); // e.g. "Mon"
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const dayOfWeek = days.indexOf(dayName);
+
         const state = {
             currentTime: this._minutesToTime(currentMins),
-            currentDate: now.toISOString().split('T')[0],
-            dayOfWeek: now.getDay(),
+            currentDate: currentDate,
+            dayOfWeek: dayOfWeek,
             phase: phase,
             isDay,
             isNight,
