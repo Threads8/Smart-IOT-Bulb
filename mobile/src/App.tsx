@@ -77,14 +77,6 @@ function App() {
     return 'Good Night';
   };
 
-  const getTimeString = () => {
-    return new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-  };
-
-  const getPhaseLabel = () => {
-    if (!envState.timeState) return '';
-    return envState.timeState.phase?.replace('_', ' ') || '';
-  };
 
   const renderPage = () => {
     switch (activePage) {

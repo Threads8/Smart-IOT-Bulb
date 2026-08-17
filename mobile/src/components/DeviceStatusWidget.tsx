@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Wifi, WifiOff, Clock, Cpu, Radio, MonitorSmartphone } from 'lucide-react';
+import { Clock, Cpu, Radio, MonitorSmartphone } from 'lucide-react';
 
 interface DeviceStatusWidgetProps {
   online: boolean;
