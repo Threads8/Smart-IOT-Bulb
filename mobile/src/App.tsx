@@ -6,8 +6,8 @@ import DeviceStatusWidget from './components/DeviceStatusWidget';
 import ChatWidget from './components/ChatWidget';
 import TimeCardWidget from './components/TimeCardWidget';
 
-// Replace with your backend URL
-const BACKEND_URL = 'http://localhost:3000/api';
+// Read backend URL from Vercel environment variables, fallback to local
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000/api';
 
 type Page = 'home' | 'ai' | 'light' | 'focus' | 'more';
 
