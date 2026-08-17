@@ -49,6 +49,14 @@ let deviceState = {
     relayState: false
 };
 
+broadcastManager.onHeartbeatCallback = (data) => {
+    deviceState.online = true;
+    deviceState.lastHeartbeat = Date.now();
+    deviceState.temperature = data.temperature;
+    deviceState.humidity = data.humidity;
+    deviceState.lightLevel = data.lightLevel;
+};
+
 // --- API ROUTES ---
 
 // 1. ESP8266 Heartbeat Endpoint

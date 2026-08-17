@@ -19,6 +19,10 @@ class BroadcastManager {
                     if (data.type === 'BUTTON_EVENT') {
                         console.log(`[WS] Button Pressed: ${data.action}`);
                         // Handle button interrupt if needed
+                    } else if (data.type === 'HEARTBEAT') {
+                        if (this.onHeartbeatCallback) {
+                            this.onHeartbeatCallback(data);
+                        }
                     }
                 } catch (e) {
                     console.error('[WS] Failed to parse message', e);
