@@ -245,13 +245,7 @@ app.post('/api/chat', async (req, res) => {
 
         // Helper functions for AI to call device commands directly
         const handleOled = async (title, message) => {
-            if (deviceState.online && deviceState.ip) {
-                await fetch(`http://${deviceState.ip}/api/command/oled`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ title: title || "NOTIFICATION", message: message || "" })
-                });
-            }
+            broadcastManager.sendAiDisplayNotification(title, message, 5000);
         };
 
         // Pass to AI Manager
